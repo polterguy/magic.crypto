@@ -28,11 +28,22 @@ namespace magic.crypto.rsa
         /// <value>The fingerprint representation of your public RSA key</value>
         public string Fingerprint { get; private set; }
 
-        internal KeyPair(byte[] publicKey, byte[] privateKey, string fingerprint)
+        /// <summary>
+        /// The SHA256 of your public key.
+        /// </summary>
+        /// <value>The SHA256 value of your public RSA key</value>
+        public byte[] FingerprintRaw { get; private set; }
+
+        internal KeyPair(
+            byte[] publicKey,
+            byte[] privateKey,
+            string fingerprint,
+            byte[] fingerprintRaw)
         {
             PublicKey = publicKey;
             PrivateKey = privateKey;
             Fingerprint = fingerprint;
+            FingerprintRaw = fingerprintRaw;
         }
     }
 }

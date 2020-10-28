@@ -137,5 +137,32 @@ namespace magic.crypto.tests
 
             Assert.Equal("Hello world", decrypted);
         }
+
+        [Fact]
+        public void SignVerifyCombinations_Bytes()
+        {
+            var generator = new KeyGenerator();
+            var key = generator.Generate(1024);
+
+            var signer = new combinations.Signer(key.PrivateKey, key.FingerprintRaw);
+            var signature = signer.Sign(Encoding.UTF8.GetBytes("Hello World"));
+
+            var verifier = new combinations.Verifier(key.PublicKey);
+            verifier.Verify(signature);
+        }
+
+        [Fact]
+        public void SignVerifyCombinations_String()
+        {
+            var generator = new KeyGenerator();
+            var key = generator.Generate(1024);
+
+            var signer = new combinations.Signer(key.PrivateKey, key.FingerprintRaw);
+            var signature = signer.SignToString("Hello World");
+
+            var verifier = new combinations.Verifier(key.PublicKey);
+            var message = verifier.VerifyToString(signature);
+            Assert.Equal("Hello World", message);
+        }
     }
 }

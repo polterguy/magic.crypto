@@ -48,9 +48,10 @@ namespace magic.crypto.rsa
             // Returning key pair according to caller's specifications.
             var publicKey = publicInfo.GetDerEncoded();
             var fingerprint = Utilities.CreateSha256Fingerprint(publicKey);
+            var fingerprintRaw = Utilities.CreateSha256(publicKey);
 
             // Returning as DER encoded raw byte[].
-            return new KeyPair(publicKey, privateInfo.GetDerEncoded(), fingerprint);
+            return new KeyPair(publicKey, privateInfo.GetDerEncoded(), fingerprint, fingerprintRaw);
         }
     }
 }

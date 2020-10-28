@@ -3,7 +3,9 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.IO;
+using System.Text;
 using magic.crypto.utilities;
 
 namespace magic.crypto.combinations
@@ -16,21 +18,73 @@ namespace magic.crypto.combinations
     {
         readonly byte[] _publicKey;
 
-        /*
-         * Creates a new instance of class.
-         */
+        /// <summary>
+        /// Creates a new instance of your class.
+        /// </summary>
+        /// <param name="publicKey">Public RSA key to use to verify the integrity of the message</param>
         public Verifier(byte[] publicKey)
         {
             _publicKey = publicKey;
         }
 
-        /*
-         * Decrypts the specified message.
-         */
-        public Message Verify(byte[] content)
+        #region [ -- Overloaded API methods -- ]
+
+        /// <summary>
+        /// Verifies the integrity of a cryptographically signed message.
+        /// 
+        /// Notice, will throw an exception if signature is not a match.
+        /// </summary>
+        /// <param name="message">Byte representation of a message previously signed with the Signer equivalent</param>
+        /// <returns>The raw message, without the signature and fingerprint of the signing key used to sign the package</returns>
+        public byte[] Verify(byte[] message)
+        {
+            return VerifyImplementation(message);
+        }
+
+        /// <summary>
+        /// Verifies the integrity of a cryptographically signed message.
+        /// 
+        /// Notice, will throw an exception if signature is not a match.
+        /// </summary>
+        /// <param name="message">Base64 representation of a message previously signed with the Signer equivalent</param>
+        /// <returns>The raw message, without the signature and fingerprint of the signing key used to sign the package</returns>
+        public byte[] Verify(string message)
+        {
+            return VerifyImplementation(Convert.FromBase64String(message));
+        }
+
+        /// <summary>
+        /// Verifies the integrity of a cryptographically signed message.
+        /// 
+        /// Notice, will throw an exception if signature is not a match.
+        /// </summary>
+        /// <param name="message">Byte representation of a message previously signed with the Signer equivalent</param>
+        /// <returns>The raw message, without the signature and fingerprint of the signing key used to sign the package</returns>
+        public string VerifyToString(byte[] message)
+        {
+            return Encoding.UTF8.GetString(VerifyImplementation(message));
+        }
+
+        /// <summary>
+        /// Verifies the integrity of a cryptographically signed message.
+        /// 
+        /// Notice, will throw an exception if signature is not a match.
+        /// </summary>
+        /// <param name="message">Base64 representation of a message previously signed with the Signer equivalent</param>
+        /// <returns>The raw message, without the signature and fingerprint of the signing key used to sign the package</returns>
+        public string VerifyToString(string message)
+        {
+            return Encoding.UTF8.GetString(VerifyImplementation(Convert.FromBase64String(message)));
+        }
+
+        #endregion
+
+        #region [ -- Private helper methods -- ]
+
+        byte[] VerifyImplementation(byte[] message)
         {
             // Reading decrypted content and returning results to caller.
-            using (var stream = new MemoryStream(content))
+            using (var stream = new MemoryStream(message))
             {
                 // Simplifying life.
                 var reader = new BinaryReader(stream);
@@ -50,9 +104,11 @@ namespace magic.crypto.combinations
                 var rsaVerifier = new rsa.Verifier(_publicKey);
                 rsaVerifier.Verify(result, signature);
 
-                // Returning a new message to caller, encapsulating decrypted message.
-                return new Message(result, signature, fingerprint);
+                // Returning only the content of the message to the caller.
+                return result;
             }
         }
+
+        #endregion
     }
 }
