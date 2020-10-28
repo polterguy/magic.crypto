@@ -10,20 +10,29 @@ using Org.BouncyCastle.Security;
 namespace magic.crypto.rsa
 {
     /*
-     * Utility class to provide common functions for other classes and methods.
+     * 
      */
+    /// <summary>
+    /// Helper class to verify a message cryptographically signed with some RSA key.
+    /// </summary>
     public class Verifier
     {
         readonly AsymmetricKeyParameter _key;
         
-        public Verifier(byte[] key)
+        /// <summary>
+        /// Creates a new instance of your type
+        /// </summary>
+        /// <param name="publicKey">Public key to verify signature with</param>
+        public Verifier(byte[] publicKey)
         {
-            _key = PublicKeyFactory.CreateKey(key);
+            _key = PublicKeyFactory.CreateKey(publicKey);
         }
 
-        /*
-         * Verifies a cryptographic signature, according to caller's specifications.
-         */
+        /// <summary>
+        /// Verifies a signature towards a public key.
+        /// </summary>
+        /// <param name="message">Message to verify</param>
+        /// <param name="signature">Signature that was generated from message</param>
         public void Verify(byte[] message, byte[] signature)
         {
             // Creating our signer and associating it with the private key.
