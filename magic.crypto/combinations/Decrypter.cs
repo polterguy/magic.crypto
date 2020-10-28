@@ -3,7 +3,9 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.IO;
+using System.Text;
 using magic.crypto.utilities;
 
 namespace magic.crypto.combinations
@@ -26,12 +28,53 @@ namespace magic.crypto.combinations
             _rsaPrivateKey = rsaPrivateKey;
         }
 
+        #region [ -- Overloaded API methods -- ]
+
         /// <summary>
         /// Decrypts a message previously encrypted with the Encrypter equivalent.
         /// </summary>
         /// <param name="message">Encrypted message you want to decrypt</param>
         /// <returns>Decrypted message</returns>
         public byte[] Decrypt(byte[] message)
+        {
+            return DecryptImplementation(message);
+        }
+
+        /// <summary>
+        /// Decrypts a message previously encrypted with the Encrypter equivalent.
+        /// </summary>
+        /// <param name="message">Encrypted message you want to decrypt in base64 encoded format</param>
+        /// <returns>Decrypted message</returns>
+        public byte[] Decrypt(string message)
+        {
+            return DecryptImplementation(Convert.FromBase64String(message));
+        }
+
+        /// <summary>
+        /// Decrypts a message previously encrypted with the Encrypter equivalent.
+        /// </summary>
+        /// <param name="message">Encrypted message you want to decrypt</param>
+        /// <returns>Decrypted message</returns>
+        public string DecryptToString(byte[] message)
+        {
+            return Encoding.UTF8.GetString(DecryptImplementation(message));
+        }
+
+        /// <summary>
+        /// Decrypts a message previously encrypted with the Encrypter equivalent.
+        /// </summary>
+        /// <param name="message">Encrypted message you want to decrypt in base64 encoded format</param>
+        /// <returns>Decrypted message</returns>
+        public string DecryptToString(string message)
+        {
+            return Encoding.UTF8.GetString(DecryptImplementation(Convert.FromBase64String(message)));
+        }
+
+        #endregion
+
+        #region [ -- Private helper methods -- ]
+
+        byte[] DecryptImplementation(byte[] message)
         {
             // Creating decryption stream.
             using (var encStream = new MemoryStream(message))
@@ -58,5 +101,7 @@ namespace magic.crypto.combinations
                 return decryptedContent;
             }
         }
+
+        #endregion
     }
 }

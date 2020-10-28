@@ -3,7 +3,9 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.IO;
+using System.Text;
 using Org.BouncyCastle.Security;
 using magic.crypto.utilities;
 
@@ -18,9 +20,6 @@ namespace magic.crypto.combinations
         readonly byte[] _encryptionKey;
         readonly SecureRandom _csrng;
 
-        /*
-         * Creates a new plain text message.
-         */
         /// <summary>
         /// Creates a new instance with the specified seed and encryption key.
         /// </summary>
@@ -36,15 +35,53 @@ namespace magic.crypto.combinations
             _encryptionKey = encryptionKey;
         }
 
-        /*
-         * Signs and encrypts the message, and returns as raw cipher to caller.
-         */
+        #region [ -- Overloaded API methods -- ]
+
         /// <summary>
         /// Encrypts the specified message, using the arguments provided during creation of instance.
         /// </summary>
         /// <param name="message">Message to encrypt</param>
         /// <returns>Encrypted message</returns>
         public byte[] Encrypt(byte[] message)
+        {
+            return EncryptImplementation(message);
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the arguments provided during creation of instance.
+        /// </summary>
+        /// <param name="message">Message to encrypt</param>
+        /// <returns>Encrypted message</returns>
+        public byte[] Encrypt(string message)
+        {
+            return EncryptImplementation(Encoding.UTF8.GetBytes(message));
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the arguments provided during creation of instance.
+        /// </summary>
+        /// <param name="message">Message to encrypt</param>
+        /// <returns>Encrypted message base64 encoded</returns>
+        public string EncryptToString(byte[] message)
+        {
+            return Convert.ToBase64String(EncryptImplementation(message));
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the arguments provided during creation of instance.
+        /// </summary>
+        /// <param name="message">Message to encrypt</param>
+        /// <returns>Encrypted message base64 encoded</returns>
+        public string EncryptToString(string message)
+        {
+            return Convert.ToBase64String(EncryptImplementation(Encoding.UTF8.GetBytes(message)));
+        }
+
+        #endregion
+
+        #region [ -- Private helper methods -- ]
+
+        byte[] EncryptImplementation(byte[] message)
         {
             // Creating encryption stream.
             using (var encStream = new MemoryStream())
@@ -70,8 +107,6 @@ namespace magic.crypto.combinations
                 return encStream.ToArray();
             }
         }
-
-        #region [ -- Private helper methods -- ]
 
         /*
          * Creates a symmetric AES encryption key, to encrypt payload.
