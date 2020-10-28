@@ -24,10 +24,10 @@ namespace magic.crypto.rsa
         /*
          * Verifies a cryptographic signature, according to caller's specifications.
          */
-        public void Verify(string algo, byte[] message, byte[] signature)
+        public void Verify(byte[] message, byte[] signature)
         {
             // Creating our signer and associating it with the private key.
-            var signer = SignerUtilities.GetSigner($"{algo}withRSA");
+            var signer = SignerUtilities.GetSigner($"SHA256withRSA");
             signer.Init(false, _key);
 
             // Signing the specified data, and returning to caller as base64.

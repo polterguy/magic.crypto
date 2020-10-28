@@ -48,7 +48,7 @@ namespace magic.crypto.combinations
 
                 // Verifying signature.
                 var rsaVerifier = new rsa.Verifier(_publicKey);
-                rsaVerifier.Verify("SHA256", result, signature);
+                rsaVerifier.Verify(result, signature);
 
                 // Returning a new message to caller, encapsulating decrypted message.
                 return new Message(result, signature, fingerprint);
