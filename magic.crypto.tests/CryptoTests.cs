@@ -3,10 +3,8 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
-using System.Linq;
 using Xunit;
-using magic.node.extensions;
+using magic.crypto.rsa;
 
 namespace magic.crypto.tests
 {
@@ -15,6 +13,8 @@ namespace magic.crypto.tests
         [Fact]
         public void CreateKeyPair()
         {
+           var generator = new KeyGenerator();
+           var key = generator.Generate(1024);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace magic.crypto.rsa
         /// Creates a new RSA key pair for you, using the specified arguments.
         /// </summary>
         /// <param name="strength">Key strength for your kew, typically 1024, 2048 4096, etc</param>
-        /// <returns></returns>
+        /// <returns>The newly created key pair</returns>
         public KeyPair Generate(int strength)
         {
             var generator = new RsaKeyPairGenerator();
