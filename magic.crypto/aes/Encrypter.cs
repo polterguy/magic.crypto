@@ -4,10 +4,13 @@
  */
 
 using System.IO;
+using System.Text;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
+using magic.crypto.utilities;
+using System;
 
 namespace magic.crypto.aes
 {
@@ -17,6 +20,18 @@ namespace magic.crypto.aes
     public class Encrypter
     {
         readonly byte[] _symmetricKey;
+
+        #region [ -- Constructors -- ]
+
+        /// <summary>
+        /// Creates a new AES encrypter, allowing you to encrypt one or more packages
+        /// using the specified key.
+        /// </summary>
+        /// <param name="symmetricKey">Encryption key to use encryption operation(s). Will be converted to byte[32] using SHA256.</param>        
+        public Encrypter(string symmetricKey)
+        {
+            _symmetricKey = Utilities.CreateSha256(Encoding.UTF8.GetBytes(symmetricKey));
+        }
 
         /// <summary>
         /// Creates a new AES encrypter, allowing you to encrypt one or more packages
@@ -28,12 +43,60 @@ namespace magic.crypto.aes
             _symmetricKey = symmetricKey;
         }
 
+        #endregion
+
+        #region [ -- Overloaded API methods -- ]
+
         /// <summary>
         /// Encrypts the specified message, using the key supplied during creation of instance.
         /// </summary>
         /// <param name="message">Plain text message you want to encrypt</param>
         /// <returns>Encrypted message</returns>
         public byte[] Encrypt(byte[] message)
+        {
+            return EncryptImplementation(message);
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the key supplied during creation of instance.
+        /// </summary>
+        /// <param name="message">Plain text message you want to encrypt</param>
+        /// <returns>Encrypted message</returns>
+        public byte[] Encrypt(string message)
+        {
+            return EncryptImplementation(Encoding.UTF8.GetBytes(message));
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the key supplied during creation of instance.
+        /// </summary>
+        /// <param name="message">Plain text message you want to encrypt</param>
+        /// <returns>Encrypted message in base64 encoded format</returns>
+        public string EncryptToString(byte[] message)
+        {
+            return Convert.ToBase64String(EncryptImplementation(message));
+        }
+
+        /// <summary>
+        /// Encrypts the specified message, using the key supplied during creation of instance.
+        /// </summary>
+        /// <param name="message">Plain text message you want to encrypt</param>
+        /// <returns>Encrypted message in base64 encoded format</returns>
+        public string EncryptToString(string message)
+        {
+            return Convert.ToBase64String(EncryptImplementation(Encoding.UTF8.GetBytes(message)));
+        }
+
+        #endregion
+
+        #region [ -- Private helper methods -- ]
+
+        /// <summary>
+        /// Encrypts the specified message, using the key supplied during creation of instance.
+        /// </summary>
+        /// <param name="message">Plain text message you want to encrypt</param>
+        /// <returns>Encrypted message</returns>
+        byte[] EncryptImplementation(byte[] message)
         {
             // Creating our nonce, or Initial Vector (IV).
             var rnd = new SecureRandom();
@@ -61,5 +124,7 @@ namespace magic.crypto.aes
                 return stream.ToArray();
             }
         }
+
+        #endregion
     }
 }

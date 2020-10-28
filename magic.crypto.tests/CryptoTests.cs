@@ -6,6 +6,7 @@
 using System;
 using System.Text;
 using Xunit;
+using Org.BouncyCastle.Crypto;
 using magic.crypto.rsa;
 
 namespace magic.crypto.tests
@@ -71,6 +72,40 @@ namespace magic.crypto.tests
 
            var verifier = new Verifier(key.PublicKey);
            Assert.Throws<ArgumentException>(() => verifier.Verify(Encoding.UTF8.GetBytes("Hello XWorld"), signature));
+        }
+
+        [Fact]
+        public void EncryptDecrypt_AES_Bytes()
+        {
+            var encrypter = new aes.Encrypter("foo");
+            var encrypted = encrypter.Encrypt(Encoding.UTF8.GetBytes("Hello World"));
+
+            var decrypter = new aes.Decrypter("foo");
+            var decrypted = decrypter.Decrypt(encrypted);
+
+            Assert.Equal("Hello World", Encoding.UTF8.GetString(decrypted));
+        }
+
+        [Fact]
+        public void EncryptDecrypt_AES_String()
+        {
+            var encrypter = new aes.Encrypter("foo");
+            var encrypted = encrypter.EncryptToString("Hello World");
+
+            var decrypter = new aes.Decrypter("foo");
+            var decrypted = decrypter.DecryptToString(encrypted);
+
+            Assert.Equal("Hello World", decrypted);
+        }
+
+        [Fact]
+        public void EncryptDecrypt_AES_Throws()
+        {
+            var encrypter = new aes.Encrypter("foo");
+            var encrypted = encrypter.Encrypt(Encoding.UTF8.GetBytes("Hello World"));
+
+            var decrypter = new aes.Decrypter("fooX");
+            Assert.Throws<InvalidCipherTextException>(() => decrypter.Decrypt(encrypted));
         }
     }
 }
