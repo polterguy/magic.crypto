@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{0080EF1F-A652-4498-BE59-F3FFFB3F33B2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "magic.crypto", "magic.crypto\magic.crypto.csproj", "{5927800B-FB2E-4A0A-A579-09DA745AE457}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "magic.crypto.tests", "magic.crypto.tests\magic.crypto.tests.csproj", "{ACB4EF9B-7385-48CE-A898-8CA981FB99A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5927800B-FB2E-4A0A-A579-09DA745AE457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5927800B-FB2E-4A0A-A579-09DA745AE457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5927800B-FB2E-4A0A-A579-09DA745AE457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5927800B-FB2E-4A0A-A579-09DA745AE457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB4EF9B-7385-48CE-A898-8CA981FB99A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB4EF9B-7385-48CE-A898-8CA981FB99A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB4EF9B-7385-48CE-A898-8CA981FB99A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB4EF9B-7385-48CE-A898-8CA981FB99A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFAF5F64-EA79-4EAF-A3F3-47FB9D1D6A4B}
+	EndGlobalSection
+EndGlobal
