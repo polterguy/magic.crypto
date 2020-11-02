@@ -3,6 +3,7 @@
  * See the enclosed LICENSE file for details.
  */
 
+using System;
 using System.IO;
 using System.Text;
 using Org.BouncyCastle.Security;
@@ -10,7 +11,6 @@ using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using magic.crypto.utilities;
-using System;
 
 namespace magic.crypto.aes
 {
