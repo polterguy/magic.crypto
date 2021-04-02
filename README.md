@@ -6,7 +6,6 @@ TODO: Document ...
 
 ## Quality gates
 
-- [![Build status](https://travis-ci.com/polterguy/magic.crypto.svg?master)](https://travis-ci.com/polterguy/magic.crypto)
 - [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=polterguy_magic.crypto&metric=alert_status)](https://sonarcloud.io/dashboard?id=polterguy_magic.crypto)
 - [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=polterguy_magic.crypto&metric=bugs)](https://sonarcloud.io/dashboard?id=polterguy_magic.crypto)
 - [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=polterguy_magic.crypto&metric=code_smells)](https://sonarcloud.io/dashboard?id=polterguy_magic.crypto)
