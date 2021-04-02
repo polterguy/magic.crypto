@@ -3,8 +3,8 @@
 Magic.crypto gives you a simplified API wrapping BouncyCastle for .Net 5. It supports the following features.
 
 * Creating RSA keypairs
-* RSA encryption/decryption
-* RSA signatures both creating/signing payloads, and verifying an existing signature/signed payload
+* RSA encryption and decryption
+* RSA signatures both signing messages, and verifying an existing signed message
 * AES symmetric cryptography
 * Combinations of the above
 
