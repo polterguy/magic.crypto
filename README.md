@@ -139,11 +139,11 @@ with hundreds of different classes and methods from BouncyCastle.
 using magic.crypto.combinations;
 
 // Encrypting a message.
-var encrypter = new combinations.Encrypter(key.PublicKey);
+var encrypter = new Encrypter(key.PublicKey);
 var encrypted = encrypter.Encrypt(Encoding.UTF8.GetBytes("Hello world"));
 
 // Decrypting the message.
-var decrypter = new combinations.Decrypter(key.PrivateKey);
+var decrypter = new Decrypter(key.PrivateKey);
 var decrypted = decrypter.Decrypt(encrypted);
 ```
 
