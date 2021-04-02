@@ -6,15 +6,15 @@
     <PackageId>magic.crypto</PackageId>
     <Authors>Thomas Hansen</Authors>
     <Company>Thomas Hansen</Company>
-    <Copyright>Thomas Hansen, thomas@gaiasoul.com</Copyright>
-    <Description>Cryptography helpers. To use package go to https://polterguy.github.io</Description>
+    <Copyright>Thomas Hansen, thomas@servergardens.com</Copyright>
+    <Description>Simplified wrappers around BouncyCastle to make it easier to use cryptography methods in your .Net project</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.crypto</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
     <PackageVersion>8.9.9</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.crypto.git</RepositoryUrl>
-    <PackageTags>cryptography, hashing, sha256, sha384, sha512</PackageTags>
+    <PackageTags>Cryptography, RSA, Hash, Sha256, Sha384, Sha512, AES256</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -38,7 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" />
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.8" />
   </ItemGroup>
 
 </Project>
