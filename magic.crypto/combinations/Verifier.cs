@@ -91,7 +91,6 @@ namespace magic.crypto.combinations
 
                 // Reading signing key.
                 var signingKey = reader.ReadBytes(32);
-                var fingerprint = Utilities.CreateFingerprint(signingKey);
 
                 // Reading signature.
                 var lengthOfSignature = reader.ReadInt32();
