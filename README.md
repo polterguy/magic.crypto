@@ -234,6 +234,10 @@ hopefully. Then internally the `GetPrivateKey` and the `GetPublicKey` above woul
 to lookup the key's fingerprint, then invoke `Utilities.CreateFingerprint` on the result returned from `GetPackageFingerprint`,
 and use the returned string to lookup the key somehow, from for instance a database, etc.
 
+## Project website
+
+The source code for this repository can be found at [github.com/polterguy/magic.crypto](https://github.com/polterguy/magic.crypto), and you can provide feedback, provide bug reports, etc at the same place.
+
 ## Quality gates
 
 - [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=polterguy_magic.crypto&metric=alert_status)](https://sonarcloud.io/dashboard?id=polterguy_magic.crypto)
