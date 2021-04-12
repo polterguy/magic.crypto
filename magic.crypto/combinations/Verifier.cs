@@ -90,7 +90,7 @@ namespace magic.crypto.combinations
                 var reader = new BinaryReader(stream);
 
                 // Reading signing key.
-                var signingKey = reader.ReadBytes(32);
+                reader.ReadBytes(32);
 
                 // Reading signature.
                 var lengthOfSignature = reader.ReadInt32();
