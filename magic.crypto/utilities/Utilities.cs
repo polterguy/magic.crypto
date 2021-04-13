@@ -10,9 +10,6 @@ using System.Security.Cryptography;
 
 namespace magic.crypto.utilities
 {
-    /*
-     * Utility class to provide common functions for other classes and methods.
-     */
     /// <summary>
     /// Utility class with helper methods.
     /// </summary>

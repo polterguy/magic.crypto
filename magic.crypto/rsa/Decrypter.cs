@@ -7,13 +7,14 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Encodings;
+using magic.crypto.utilities;
 
 namespace magic.crypto.rsa
 {
     /// <summary>
     /// Helper class to decrypt a message using RSA encryption.
     /// </summary>
-    public class Decrypter
+    public class Decrypter : DecrypterBase
     {
         readonly AsymmetricKeyParameter _privateRsaKey;
 
@@ -26,12 +27,8 @@ namespace magic.crypto.rsa
             _privateRsaKey = PrivateKeyFactory.CreateKey(privateRsaKey);
         }
 
-        /// <summary>
-        /// Decrypts the specified message, using the private RSA key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Encrypted message</param>
-        /// <returns>Decrypted message</returns>
-        public byte[] Decrypt(byte[] message)
+        /// <inheritdoc />
+        protected override byte[] DecryptImplementation(byte[] message)
         {
             // Creating our encryption engine, and decorating according to caller's specifications.
             var encryptEngine = new Pkcs1Encoding(new RsaEngine());

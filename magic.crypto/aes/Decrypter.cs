@@ -3,7 +3,6 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.IO;
 using System.Text;
 using Org.BouncyCastle.Crypto.Modes;
@@ -16,7 +15,7 @@ namespace magic.crypto.aes
     /// <summary>
     /// AES decrypter class that helps you decrypt an AES message.
     /// </summary>
-    public class Decrypter
+    public class Decrypter : DecrypterBase
     {
         readonly byte[] _symmetricKey;
 
@@ -44,64 +43,10 @@ namespace magic.crypto.aes
 
         #endregion
 
-        #region [ -- Overloaded API methods -- ]
+        #region [ -- Implementation of abstract base class -- ]
 
-        /// <summary>
-        /// Decrypts the specified data with the key supplied during creation of instance.
-        /// 
-        /// Notice, will throw an exception if the key is not the same key the package was encrypted with.
-        /// </summary>
-        /// <param name="message">The message you want to decrypt</param>
-        /// <returns>Decrypted message</returns>
-        public byte[] Decrypt(byte[] message)
-        {
-            return DecryptImplementation(message);
-        }
-
-        /// <summary>
-        /// Decrypts the specified data with the key supplied during creation of instance,
-        /// assuming string is the base64 encoded result of an AES encrypt operation.
-        /// 
-        /// Notice, will throw an exception if the key is not the same key the package was encrypted with.
-        /// </summary>
-        /// <param name="message">The base64 encoded message you want to decrypt</param>
-        /// <returns>Decrypted message</returns>
-        public byte[] Decrypt(string message)
-        {
-            return DecryptImplementation(Convert.FromBase64String(message));
-        }
-
-        /// <summary>
-        /// Decrypts the specified message and converts to string, assuming content
-        /// is UTF8 bytes.
-        /// 
-        /// Notice, will throw an exception if the key is not the same key the package was encrypted with.
-        /// </summary>
-        /// <param name="message">The message you want to decrypt</param>
-        /// <returns>Decrypted message</returns>
-        public string DecryptToString(byte[] message)
-        {
-            return Encoding.UTF8.GetString(DecryptImplementation(message));
-        }
-
-        /// <summary>
-        /// Decrypts the specified message and converts to string, assuming content
-        /// is UTF8 bytes.
-        /// 
-        /// Notice, will throw an exception if the key is not the same key the package was encrypted with.
-        /// </summary>
-        /// <param name="message">The message you want to decrypt</param>
-        /// <returns>Decrypted message</returns>
-        public string DecryptToString(string message)
-        {
-            return Encoding.UTF8.GetString(DecryptImplementation(Convert.FromBase64String(message)));
-        }
-
-        #endregion
-
-        #region [ -- Private helper methods -- ]
-
-        byte[] DecryptImplementation(byte[] message)
+        /// <inheritdoc />
+        protected override byte[] DecryptImplementation(byte[] message)
         {
             using (var stream = new MemoryStream(message))
             {

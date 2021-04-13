@@ -3,7 +3,6 @@
  * See the enclosed LICENSE file for details.
  */
 
-using System;
 using System.IO;
 using System.Text;
 using Org.BouncyCastle.Security;
@@ -17,7 +16,7 @@ namespace magic.crypto.aes
     /// <summary>
     /// AES encrypter class, allowing you to encrypt some message with AES.
     /// </summary>
-    public class Encrypter
+    public class Encrypter : EncrypterBase
     {
         readonly byte[] _symmetricKey;
 
@@ -45,58 +44,10 @@ namespace magic.crypto.aes
 
         #endregion
 
-        #region [ -- Overloaded API methods -- ]
+        #region [ -- Implementation of abstract base class -- ]
 
-        /// <summary>
-        /// Encrypts the specified message, using the key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Plain text message you want to encrypt</param>
-        /// <returns>Encrypted message</returns>
-        public byte[] Encrypt(byte[] message)
-        {
-            return EncryptImplementation(message);
-        }
-
-        /// <summary>
-        /// Encrypts the specified message, using the key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Plain text message you want to encrypt</param>
-        /// <returns>Encrypted message</returns>
-        public byte[] Encrypt(string message)
-        {
-            return EncryptImplementation(Encoding.UTF8.GetBytes(message));
-        }
-
-        /// <summary>
-        /// Encrypts the specified message, using the key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Plain text message you want to encrypt</param>
-        /// <returns>Encrypted message in base64 encoded format</returns>
-        public string EncryptToString(byte[] message)
-        {
-            return Convert.ToBase64String(EncryptImplementation(message));
-        }
-
-        /// <summary>
-        /// Encrypts the specified message, using the key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Plain text message you want to encrypt</param>
-        /// <returns>Encrypted message in base64 encoded format</returns>
-        public string EncryptToString(string message)
-        {
-            return Convert.ToBase64String(EncryptImplementation(Encoding.UTF8.GetBytes(message)));
-        }
-
-        #endregion
-
-        #region [ -- Private helper methods -- ]
-
-        /// <summary>
-        /// Encrypts the specified message, using the key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Plain text message you want to encrypt</param>
-        /// <returns>Encrypted message</returns>
-        byte[] EncryptImplementation(byte[] message)
+        /// <inheritdoc />
+        protected override byte[] EncryptImplementation(byte[] message)
         {
             // Creating our nonce, or Initial Vector (IV).
             var rnd = new SecureRandom();

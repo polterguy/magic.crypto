@@ -7,13 +7,14 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Encodings;
+using magic.crypto.utilities;
 
 namespace magic.crypto.rsa
 {
     /// <summary>
     /// Helper class to encrypt some message(s) using RSA cryptography
     /// </summary>
-    public class Encrypter
+    public class Encrypter : EncrypterBase
     {
         readonly AsymmetricKeyParameter _publicRsaKey;
 
@@ -26,12 +27,10 @@ namespace magic.crypto.rsa
             _publicRsaKey = PublicKeyFactory.CreateKey(publicRsaKey);
         }
 
-        /// <summary>
-        /// Encrypts the specified message using the public RSA key supplied during creation of instance.
-        /// </summary>
-        /// <param name="message">Message to encrypt</param>
-        /// <returns>Encrypted message</returns>
-        public byte[] Encrypt(byte[] message)
+        #region [ -- Implementation of abstract base class -- ]
+
+        /// <inheritdoc />
+        protected override byte[] EncryptImplementation(byte[] message)
         {
             // Creating our encryption engine, and decorating according to caller's specifications.
             var encryptionEngine = new Pkcs1Encoding(new RsaEngine());
@@ -41,5 +40,7 @@ namespace magic.crypto.rsa
             var result = encryptionEngine.ProcessBlock(message, 0, message.Length);
             return result;
         }
+
+        #endregion
     }
 }
