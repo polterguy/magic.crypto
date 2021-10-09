@@ -10,24 +10,24 @@
     <Description>Simplified wrappers around BouncyCastle to make it easier to use cryptography methods in your .Net project</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.crypto</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>9.6.6</PackageVersion>
+    <PackageVersion>9.7.0</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.crypto.git</RepositoryUrl>
     <PackageTags>Cryptography, RSA, Hash, Sha256, Sha384, Sha512, AES256</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageIcon>ico.png</PackageIcon>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageIcon>ico.png</PackageIcon>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="../ico.png" Pack="true" PackagePath="$(PackageIcon)" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
