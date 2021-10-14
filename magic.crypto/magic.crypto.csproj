@@ -10,7 +10,7 @@
     <Description>Simplified wrappers around BouncyCastle to make it easier to use cryptography methods in your .Net project</Description>
     <PackageProjectUrl>https://github.com/polterguy/magic.crypto</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>9.7.0</PackageVersion>
+    <PackageVersion>9.7.5</PackageVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/polterguy/magic.crypto.git</RepositoryUrl>
